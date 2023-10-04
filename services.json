@@ -1,0 +1,128 @@
+{
+    "Services":[
+        {
+            "serviceName":["AJRouter"],
+            "help":"connect to iot devices",
+            "displayName":["AllJoyn Router service"]
+        },
+        {
+            "serviceName":["AssignedAccessManagerSvc"],
+            "help":"kiosk mode(This feature allows you to place restrictions on your computer. More specifically, it empowers you to force all users to access only a single app on your PC.)",
+            "displayName":["AssignedAccessManager Service"]
+        },
+        {
+            "serviceName":["BDESVC"],
+            "help":"BitLocker is beneficial for encrypting your hard drive. However, you might not use it regularly due to its low popularity among Windows users. If so, you can safely disable the BitLocker Drive Encryption service",
+            "displayName":["BitLocker Drive Encryption Service"]
+        },
+        {
+            "serviceName":["BTAGService",
+                        "bthserv",
+                        "BluetoothUserService_18bd0f"],
+            "help":"The Bluetooth user service supports proper functionality of Bluetooth features relevant to each user session",
+            "displayName":["Bluetooth Audio Gateway Service",
+                        "Bluetooth Support Service",
+                        "Bluetooth User Support Service"]
+        },
+        {
+            "serviceName":["DiagTrack"],
+            "help":"The Connected User Experiences and Telemetry service is responsible for sending your usage and diagnostic data to Microsoft servers. So, if this service is enabled on your computer, Microsoft may easily track the apps you use, the searches you make on the search bar, and more",
+            "displayName":["user experience and telemetry"]
+        },
+        {
+            "serviceName":["DoSvc"],
+            "help":"[Requires System Access To Disable] The Delivery Optimization service does precisely what its name suggests: it improves the download speed of Windows updates and Microsoft apps by sharing bandwidth with your nearby devices",
+            "displayName":["Delivery Optimization"]
+        },
+        {
+            "serviceName":["diagsvc",
+                            "DPS",
+                            "WdiServiceHost",
+                            "WdiSystemHost"],
+            "help":"[NOT ADVISED TO DISABLE]disable if you don't prefer running any Windows troubleshooter",
+            "displayName":["Diagnostic Execution Service",
+                            "Diagnostic Policy Service",
+                            "Diagnostic Service Host",
+                            "Diagnostic System Host"]
+        },
+        {
+            "serviceName":["lfsvc"],
+            "help":"Once the Geolocation service is disabled, you won't be able to share your location using any Windows app or web browser.",
+            "displayName":["Geolocation Service"]
+        },
+        {
+            "serviceName":["Netlogon"],
+            "help":"this service is only helpful in authenticating users within a domain environment",
+            "displayName":["Netlogon"]
+        },
+        {
+            "serviceName":["defragsvc"],
+            "help":"[NOT ADVISED TO DISABLE]this service handles routine defragmentation and optimization of your drives.",
+            "displayName":["Optimize Drives"]
+        },
+        {
+            "serviceName":["WpcMonSvc"],
+            "help":"restrict children use",
+            "displayName":["Parental Controls"]           
+        },
+        {
+            "serviceName":["PhoneSvc"],
+            "help":"connections between windows and phone (ex : Make and receive phone calls from your PC)",
+            "displayName":["Phone Service"]
+        },
+        {
+            "serviceName":["Spooler"],
+            "help":"printer devices",
+            "displayName":["Print Spooler"]
+        },
+        {
+            "serviceName":["SessionEnv",
+                            "TermService",
+                            "UmRdpService"],
+            "help":"Windows 11 includes a helpful feature called Remote Desktop Connection. By using it, you can connect to any remote computer on the same network. And the Remote Desktop services handle the backend when you try to establish a connection",
+            "displayName":["Remote Desktop Configuration",
+                            "Remote Desktop Services",
+                            "Remote Desktop Services UserMode Port Redirector"]
+        },
+        {
+            "serviceName":["SensorService"],
+            "help":"The Sensor service manages integration with sensors like GPS and ambient light sensors. If your device doesn't come equipped with such sensors or if you don't use applications that need sensor data, disabling this service is a good decision",
+            "displayName":["Sensor Service"]
+        },
+        {
+            "serviceName":["SCardSvr",
+                            "ScDeviceEnum",
+                            "SCPolicySvc"],
+            "help":"if you're a typical Windows user who prefers using a keyboard for login, you can disable the smart card",
+            "displayName":["Smart Card",
+                            "Smart Card Device Enumeration Service",
+                            "Smart Card Removal Policy"]
+        },
+        {
+            "serviceName":["WbioSrvc"],
+            "help":"The Windows Biometric service is only helpful if you are using a laptop. It just enables the fingerprint to unlock functionality on laptops",
+            "displayName":["Windows Biometric Service"]
+        },
+        {
+            "serviceName":["WerSvc"],
+            "help":"It then generates information about the error and sends it to Microsoft for further diagnosis.",
+            "displayName":["Windows Error Reporting Service"]
+        },
+        {
+            "serviceName":["workfolderssvc"],
+            "help":"Work Folders are generally used in large organizations where people can store their local work-related files on a centralized server",
+            "displayName":["Work Folders"]
+        },
+        {
+            "serviceName":["XboxGipSvc",
+                            "XblAuthManager",
+                            "XblGameSave",
+                            "XboxNetApiSvc"],
+            "help":"If you don't use an Xbox or need any such feature in games, you can safely disable all the xbox services",
+            "displayName":["Xbox Accessory Management Service",
+                            "Xbox Live Auth Manager",
+                            "Xbox Live Game Save",
+                            "Xbox Live Networking Service"]
+        }
+    ]
+}
