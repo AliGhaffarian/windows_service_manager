@@ -107,20 +107,56 @@ int RollBack(const std::vector<WindowsService> &services){
 	return 1;
 }
 
-int main(int argc, char ** args) {
-	
-	std::string arg = args[1];
-	
-    std::vector<WindowsService> WindowsServices;
+void PrintHelp(){
+	system("cls");
+	std::cout << "this program will disable the services you agree to.\n" <<
+					"DO NOT disable the services that are NOT ADVISED TO DISABLE unless you abolustly know what they are.\n" <<
+					"You can enable all the listed services in the app by calling this app with \"rollbacl\" argument from the terminal.\n" <<
+					"You can find the services by their display name in the services app.\n" <<
+					"Be carefull out there!" << std::endl;
+}
 
-    if (LoadFromJson(WindowsServices) == 1)
-    	return 1;
-
+void ArgsHandler(std::string arg, const std::vector<WindowsService> &WindowsServices){
+	
 	if (arg == "rollback"){
 		RollBack(WindowsServices);
 		system("pause");
 		exit(0);
 	}
+	
+	if (arg == "help"){
+		PrintHelp();
+		system("pause");
+		exit(0);
+	}
+}
+
+int main(int argc, char ** args) {
+	
+	std::vector<WindowsService> WindowsServices;
+
+    if (LoadFromJson(WindowsServices) == 1)
+    	return 1;
+	
+	if (argc > 1){
+		ArgsHandler(args[1], WindowsServices);
+	}
+	
+	
+	PrintHelp();
+	system("pause");
+	system("cls");
+
+	std::cout << "rollback? y/n";
+	char input;
+	std::cin >> input;
+	if(input == 'Y' || input == 'y'){
+		RollBack(WindowsServices);
+		system("pause");
+		exit(0);
+	}
+	
+	system("cls");	
 
     // Loop through WindowsServices and ask for confirmation to disable
 	for (const auto& service : WindowsServices) {
