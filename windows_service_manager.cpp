@@ -37,7 +37,7 @@ enum ServiceAction {
     Enable
 };
 
-int WindowsServiceAction(const WindowsService& service, ServiceAction action) {
+int WindowsServiceAction(const WindowsService& service, ServiceAction action, std::ofstream &log) {
     // Use the system function to enable or disable the service
     
     int result;
@@ -51,14 +51,19 @@ int WindowsServiceAction(const WindowsService& service, ServiceAction action) {
 	    } else {
 	        command += "auto"; // You can change this to "demand" or "auto" as needed
 	    }
-	    int result = system(command.c_str());
-	    
+	    result = system(command.c_str());
+	    if (result == 0){
+			std::string logStr = serviceName + " " + (action == Disable ? "disabled" : "auto");
+			log.write(logStr.c_str(), logStr.size());
+			log.write("\n", 1);
+		}
+		
 	}
 	
     return result;
 }
 
-int UserConfirmWindowsServiceAction(const WindowsService& service, ServiceAction action) {
+int UserConfirmWindowsServiceAction(const WindowsService& service, ServiceAction action, std::ofstream &log) {
     // Ask the user for confirmation
     
     std::cout <<"Usage Of Service : "<< service.help << "\n\n";
@@ -72,7 +77,7 @@ int UserConfirmWindowsServiceAction(const WindowsService& service, ServiceAction
     std::cin >> response;
     
     if (response == 'y' || response == 'Y') {
-        return WindowsServiceAction(service, action);
+        return WindowsServiceAction(service, action, log);
     } else {
         return 1; // Action canceled
     }
@@ -167,11 +172,11 @@ std::vector<std::string> ActiveServiceNames(std::string fileName = "QueryResult.
 
 
 
-int RollBack(const std::vector<WindowsService> &services){
+int RollBack(const std::vector<WindowsService> &services, std::ofstream &log){
 	for(auto &service : services){
-		WindowsServiceAction(service, ServiceAction::Enable);
+		WindowsServiceAction(service, ServiceAction::Enable, log);
 	}
-	return 1;
+	return 0;
 }
 
 void PrintHelp(){
@@ -185,17 +190,19 @@ void PrintHelp(){
 
 
 
-void ArgsHandler(std::string arg, const std::vector<WindowsService> &WindowsServices){
+void ArgsHandler(std::string arg, const std::vector<WindowsService> &WindowsServices, std::ofstream &log){
 	
 	if (arg == "rollback"){
-		RollBack(WindowsServices);
+		RollBack(WindowsServices, log);
 		system("pause");
+		log.close();
 		exit(0);
 	}
 	
 	if (arg == "help"){
 		PrintHelp();
 		system("pause");
+		log.close();
 		exit(0);
 	}
 }
@@ -259,8 +266,7 @@ std::string GetLogFileName() {
 
 std::ofstream CreateLogFile(){
 	std::string fileName = GetLogFileName();
-	std::cout << fileName;
-	system("pause");
+	
     std::ofstream log(fileName);
 
     if (!log.is_open()) {
@@ -277,16 +283,17 @@ std::ofstream CreateLogFile(){
 int main(int argc, char ** args) {
 	
 	std::vector<WindowsService> windowsServices;
+	std::ofstream log = CreateLogFile();
+
 	if (LoadFromJson(windowsServices) == 1)
     	return 1;
 	
 	if (argc > 1){
-		ArgsHandler(args[1], windowsServices);
+		ArgsHandler(args[1], windowsServices, log);
 	}
 	
 	system("cls");
 	
-	CreateLogFile();
 	
 	
 	PrintHelp();
@@ -301,8 +308,9 @@ int main(int argc, char ** args) {
 	char input;
 	std::cin >> input;
 	if(input == 'Y' || input == 'y'){
-		RollBack(windowsServices);
+		RollBack(windowsServices, log);
 		system("pause");
+		log.close();
 		exit(0);
 	}
 	
@@ -310,7 +318,7 @@ int main(int argc, char ** args) {
 
     // Loop through WindowsServices and ask for confirmation to disable
 	for (const auto& service : windowsServices) {
-        int result = UserConfirmWindowsServiceAction(service, ServiceAction::Disable);
+        int result = UserConfirmWindowsServiceAction(service, ServiceAction::Disable, log);
         if (result == 0) {
             std::cout << "Service disabled successfully." << std::endl;
             system("pause");
@@ -325,6 +333,6 @@ int main(int argc, char ** args) {
             system("cls");
         }
     }
-
+	log.close();
     return 0;
 }

@@ -7,7 +7,7 @@
         },
         {
             "serviceName":["AssignedAccessManagerSvc"],
-            "help":"kiosk mode(This feature allows you to place restrictions on your computer. More specifically, it empowers you to force all users to access only a single app on your PC.)",
+            "help":"[Requires Manual Disable] kiosk mode\n(This feature allows you to place restrictions on your computer. More specifically, it empowers you to force all users to access only a single app on your PC.)",
             "displayName":["AssignedAccessManager Service"]
         },
         {
@@ -31,7 +31,7 @@
         },
         {
             "serviceName":["DoSvc"],
-            "help":"[Requires System Access To Disable] The Delivery Optimization service does precisely what its name suggests: it improves the download speed of Windows updates and Microsoft apps by sharing bandwidth with your nearby devices",
+            "help":"[Requires Manual Disable] The Delivery Optimization service does precisely what its name suggests: it improves the download speed of Windows updates and Microsoft apps by sharing bandwidth with your nearby devices",
             "displayName":["Delivery Optimization"]
         },
         {
@@ -123,6 +123,11 @@
                             "Xbox Live Auth Manager",
                             "Xbox Live Game Save",
                             "Xbox Live Networking Service"]
+        },
+        {
+            "serviceName":["wuauserv"],
+            "help":"Windows update service",
+            "displayName":"Windows Update"
         }
     ]
 }
